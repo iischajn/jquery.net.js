@@ -1,0 +1,27 @@
+{
+  "name": "net",
+  "title": "Net",
+  "description": "ajax manager",
+  "version": "0.1.0",
+  "homepage": "https://github.com/chajn/jquery-net",
+  "author": {
+    "name": "chajn",
+    "email": "chajn@qq.com",
+    "url": "iischajn.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/chajn/jquery-net.git"
+  },
+  "bugs": "https://github.com/chajn/jquery-net/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/chajn/jquery-net/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "keywords": []
+}
