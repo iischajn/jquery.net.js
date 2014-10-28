@@ -106,7 +106,8 @@
 
     function delay(id, url, method, opt) {
         opt = $.extend({
-            'delay': $.net.options.delay
+            'delay': $.net.options.delay,
+            'lock': false
         }, opt);
         return add(id, url, method, opt);
     }
