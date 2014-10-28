@@ -1,10 +1,6 @@
-/*
- * net
- * https://github.com/chajn/jquery-net
- *
- * Copyright (c) 2014 chajn
- * Licensed under the MIT license.
- */
+/*! Net - v0.1.0 - 2014-10-28
+* https://github.com/chajn/jquery-net
+* Copyright (c) 2014 chajn; Licensed MIT */
 (function($) {
 
     var trans = {};
