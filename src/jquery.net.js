@@ -1,8 +1,8 @@
 /*
  * net
- * https://github.com/chajn/jquery-net
+ * https://github.com/iischajn/jquery-net
  *
- * Copyright (c) 2014 chajn
+ * Copyright (c) 2014 iischajn
  * Licensed under the MIT license.
  */
 (function($) {

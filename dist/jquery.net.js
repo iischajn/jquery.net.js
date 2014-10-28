@@ -1,6 +1,6 @@
 /*! Net - v0.1.0 - 2014-10-28
-* https://github.com/chajn/jquery-net
-* Copyright (c) 2014 chajn; Licensed MIT */
+* https://github.com/iischajn/jquery-net
+* Copyright (c) 2014 iischajn; Licensed MIT */
 (function($) {
 
     var trans = {};
