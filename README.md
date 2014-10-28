@@ -5,8 +5,8 @@ a lightweight jQuery ajax manager
 ## Getting Started
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/chajn/jquery-net/master/dist/jquery.net.min.js
-[max]: https://raw.github.com/chajn/jquery-net/master/dist/jquery.net.js
+[min]: https://raw.github.com/iischajn/jquery-net/master/dist/jquery.net.min.js
+[max]: https://raw.github.com/iischajn/jquery-net/master/dist/jquery.net.js
 
 In your web page:
 
