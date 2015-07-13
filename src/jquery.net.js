@@ -18,6 +18,8 @@
         jsonp: false,
         plain: false,
         sending: false,
+        formdata: false,
+        token: true,
         delay: false
     };
 
@@ -43,9 +45,9 @@
         request(tran, param, cb, hookObj);
     }
 
-    function execute(func, data) {
+    function execute(func, data, tran) {
         if ($.isFunction(func)) {
-            func(data);
+            func(data, tran);
             return true;
         }
         return false;
@@ -55,13 +57,17 @@
         if (!tran.url) {
             return false;
         }
+        if (!tran.jsonp && $.net.options.token) {
+            $.extend(param, $.net.options.token);
+        }
+
         var config = {
             url: tran.url,
             type: tran.method,
             data: param,
             cache: false,
             dataType: tran.jsonp ? "jsonp" : "json",
-            jsonp: 'cb',
+            jsonp: 'callback',
             jsonpCallback: 'cb' + $.now(),
             success: function(data) {
                 if (tran.audit) {
@@ -74,11 +80,11 @@
                             cb(data);
                         }
                     } else if (tran.hook) {
-                        if (!execute(hookObj[code], data)) {
-                            execute(hookObj.normal, data);
+                        if (!execute(hookObj[code], data, tran)) {
+                            execute(hookObj.normal, data, tran);
                         }
                     }
-                    execute(hookObj.end, data);
+                    execute(hookObj.end, data, tran);
                 } else {
                     if (cb) {
                         cb(data);
@@ -88,10 +94,18 @@
             },
             complete: function() {
                 tran.sending = false;
+            },
+            error: function() {
+                execute(hookObj.error);
+                execute(hookObj.end);
             }
         };
         if (tran.plain) {
             config.dataType = "";
+        }
+        if (param instanceof FormData) {
+            config.contentType = false;
+            config.processData = false;
         }
         $.ajax(config);
     }
@@ -204,12 +218,14 @@
         status: status
     };
     $.net.options = {
-        okCode: 0,
+        okCode: '0',
         delay: 10000,
-        codeName: 'errno',
+        token: false,
+        codeName: 'code',
         hook: {
             normal: function() {},
-            end: false
+            end: false,
+            error: function() {}
         }
     };
 }(jQuery));
