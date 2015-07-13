@@ -3,7 +3,7 @@
   "title": "Net",
   "description": "ajax manager",
   "version": "0.1.0",
-  "homepage": "https://github.com/iischajn/jquery-net",
+  "homepage": "https://github.com/iischajn/jquery.net.js",
   "author": {
     "name": "iischajn",
     "email": "chajn@qq.com",
@@ -11,17 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/iischajn/jquery-net.git"
+    "url": "git://github.com/iischajn/jquery.net.js.git"
   },
-  "bugs": "https://github.com/iischajn/jquery-net/issues",
+  "bugs": "https://github.com/iischajn/jquery.net.js/issues",
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/iischajn/jquery-net/blob/master/LICENSE-MIT"
+      "url": "https://github.com/iischajn/jquery.net.js/blob/master/LICENSE-MIT"
     }
   ],
   "dependencies": {
     "jquery": "*"
   },
-  "keywords": ["jquery-plugin","ajax-manager","net"]
+  "keywords": ["jquery plugin","ajax manager","net"]
 }
