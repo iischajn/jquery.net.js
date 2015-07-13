@@ -4,6 +4,7 @@
   "description": "ajax manager",
   "version": "0.1.0",
   "homepage": "https://github.com/iischajn/jquery.net.js",
+  "files": ["jquery.net.js"],
   "author": {
     "name": "iischajn",
     "email": "chajn@qq.com",
