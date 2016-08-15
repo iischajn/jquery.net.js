@@ -54,15 +54,22 @@
     }
 
     function request(tran, param, cb, hookObj) {
-        if (!tran.url) {
+        var opt = $.net.options;
+        var url = tran.url;
+        if (!url) {
             return false;
         }
-        if (!tran.jsonp && $.net.options.token) {
-            $.extend(param, $.net.options.token);
+        if (!tran.jsonp && opt.token) {
+            $.extend(param, opt.token);
         }
-
+        if(opt.host && url.indexOf('http') == -1){
+            url = opt.host + url;
+        }
+        
+        hookObj = $.extend({}, opt.hook, hookObj);
+                                
         var config = {
-            url: tran.url,
+            url: url,
             type: tran.method,
             data: param,
             cache: false,
@@ -71,10 +78,8 @@
             jsonpCallback: 'cb' + $.now(),
             success: function(data) {
                 if (tran.audit) {
-                    var opt = $.net.options;
                     data[opt.codeName] = data[opt.codeName] || 0;
                     var code = data[opt.codeName];
-                    hookObj = $.extend({}, opt.hook, hookObj);
                     if (code === opt.okCode) {
                         if (cb) {
                             cb(data);
@@ -203,6 +208,30 @@
             }
         });
     };
+    
+    $.fn.getFormData = function() {
+        var obj = {};
+        var params = this.serializeArray();
+        $.each(params, function(i, field){
+            obj[field.name] = field.value;
+        });
+        return obj;
+    };
+
+    $.fn.setFormData = function(item) {
+        var elList = $(this).find('[name]');
+        $.each(elList, function(i, el){
+            el = $(el);
+            var name = el.attr('name');
+            if(typeof item == 'string'){
+                el.val(item);
+            }else if(item[name]){
+                el.val(item[name]);
+            }
+        });
+    };
+    
+
 
     $.net = {
         add: add,
@@ -223,9 +252,11 @@
         token: false,
         codeName: 'code',
         hook: {
-            normal: function() {},
-            end: false,
-            error: function() {}
+            normal: function(res) {},
+            end: function(res){
+                console.log(res);
+            },
+            error: function(res) {}
         }
     };
 }(jQuery));
