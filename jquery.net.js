@@ -26,7 +26,10 @@
     function connect(name, param, cb, hookObj) {
         var tran = trans[name];
         var curDate = $.now();
-        if (!tran || (tran.lock && tran.sending)) {
+        if(!tran){
+            tran = add(name);
+        }
+        if (tran.lock && tran.sending) {
             return false;
         }
         if (tran.delay) {
@@ -171,8 +174,12 @@
 
     function add(id, url, method, opt) {
         var tran = {};
-        if (id === undefined || arguments[1] === undefined) {
+
+        if(id === undefined){
             throw "Invalid arguments";
+        }
+        if (arguments[1] === undefined) {
+            url = arguments[0];
         }
         if (typeof arguments[1] === 'object') {
             tran = arguments[1];
@@ -233,6 +240,26 @@
     
 
 
+    function getUrlParam(paramName) {
+        if(paramName){
+            var reg = new RegExp("(^|&)"+ paramName +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r!=null) return unescape(r[2]); return null;
+
+        }
+        
+        var url = location.search; 
+        var thisParam = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for(var i = 0; i < strs.length; i ++) {
+                thisParam[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+            }
+        }
+        return thisParam;
+    }
+
     $.net = {
         add: add,
         get: get,
@@ -244,7 +271,8 @@
         unaudit: unaudit,
         connect: connect,
         request: request,
-        status: status
+        status: status,
+        getUrlParam:getUrlParam
     };
     $.net.options = {
         okCode: '0',
